@@ -5,7 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a9cdad5-d44d-43ff-9f2e-4a3a01dd0b8e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/gestion/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestion/templates/items/additem.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestion/templates/items/deleteitem.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestion/templates/items/lenditem.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestion/templates/items/listitem.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestion/templates/items/returnitem.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestion/templates/items/updateitem.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestion/templates/medias/addmedia.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestion/templates/medias/deletemedia.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestion/templates/medias/listmedia.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestion/templates/medias/updatemedia.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gestion/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gestion/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/gestion/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gestion/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/gestion/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mediatheque.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mediatheque.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mediatheque/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mediatheque/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +47,7 @@
   "keyToString": {
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "media",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -40,6 +56,12 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jerem\Documents\Documents\Cours\Django\mediatheque\gestion\templates\medias" />
+      <recent name="C:\Users\jerem\Documents\Documents\Cours\Django\mediatheque\gestion\templates\items" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="mediatheque" type="Python.DjangoServer" factoryName="Django server">
       <module name="mediatheque" />
@@ -82,11 +104,22 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1729159245539</updated>
-      <workItem from="1729159260512" duration="797000" />
+      <workItem from="1729159260512" duration="42814000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
