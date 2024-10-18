@@ -1,0 +1,9 @@
+<html lang="fr">
+    <h1>Retourner le {{ media.name }}, {{ item.name }}</h1>
+    <p>Souhaitez vous enregistrer le retour du {{ media.name }}, {{ item.name }} par le membre {{ borrower.name }}</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Enregistrer retour"/>
+        <a href="{% url 'listitem' cat=media.name %}"><input type="button" value="Non"/></a>
+    </form>
+</html>

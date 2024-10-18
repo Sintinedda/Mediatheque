@@ -1,0 +1,14 @@
+<html lang="fr">
+    <h1>Liste des médias par catégorie</h1>
+    <p>Veuillez séléctionner une catégorie ou en ajouter une</p>
+    <a href="{% url 'addmedia' %}">Ajouter un type de média</a>
+    <ul>
+        {% for media in medias %}
+            <li>
+                <a href="{% url 'updatemedia' cat=media.name %}"><input type="button" value="Modifier"></a>
+                <a href="{% url 'deletemedia' cat=media.name %}"><input type="button" value="Supprimer"></a>
+                <a href="{% url 'listitem' cat=media.name %}"> - {{ media.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</html>

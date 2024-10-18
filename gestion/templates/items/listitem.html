@@ -1,0 +1,16 @@
+<html lang="fr">
+    <h1>Liste des {{ media.name }}</h1>
+    <p>Veuillez séléctionner un {{ media.name }} ou en ajouter un</p>
+    <a href="/gestion/medias/{{ media.name }}/additem">Ajouter un {{ media.name }}</a>
+    <ul>
+        {% for item in items %}
+            <li>
+                <a href="{% url 'updateitem' cat=media.name id=item.id %}"><input type="button" value="Modifier"></a>
+                <a href="{% url 'deleteitem' cat=media.name id=item.id %}"><input type="button" value="Supprimer"></a>
+                <a href="{% url 'lenditem' cat=media.name id=item.id %}">
+                    <input type="button" value="{{ item.available|yesno:"Prêter,Retourner" }}"></a>
+                {{ item.available|yesno:"Disponible,En prêt" }} - {{ item.name }}  -  {{ item.author }}
+            </li>
+        {% endfor %}
+    </ul>
+</html>

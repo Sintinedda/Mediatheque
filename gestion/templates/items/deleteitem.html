@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Delete item from database</title>
+    </head>
+    <body>
+        <h1>Vous êtes sur le point de supprimer le {{ media.name }}, {{ item.name }}</h1>
+        <p>Voulez vous vraiment supprimer le {{ media.name }}, {{ item.name }} de la base de données??</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Supprimer"/>
+            <a href="{% url 'listitem' cat=media.name %}"><input type="button" value="Non"></a>
+        </form>
+    </body>
+</html>

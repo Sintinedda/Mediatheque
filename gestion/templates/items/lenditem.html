@@ -1,0 +1,10 @@
+<html lang="fr">
+    <h1>Prêter {{ media.name }}</h1>
+    <p>Veuillez choisir dans la liste à quel membre vous souhaité
+    prêter le {{ media.name }}, {{ item.name }}</p>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Prêter"/>
+    </form>
+</html>
