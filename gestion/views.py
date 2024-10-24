@@ -61,3 +61,72 @@ def delcat(request, cat):
     else:
         return render(request, 'category/delcat.html',
                       {'cat': cat})
+
+
+                                           # ITEM
+
+def itemlist(request, cat):
+    cat = Category.objects.get(name=cat)
+    items = Item.objects.filter(category__name=cat)
+    loans = Loan.objects.all()
+    return render(request, 'item/itemlist.html',
+                  {'cat': cat, 'items': items, 'loans': loans})
+
+
+def additem(request, cat):
+    cat = Category.objects.get(name=cat)
+    if request.method == 'POST':
+        form = AddItemForm(request.POST)
+        name = request.POST.get('name')
+        creator = request.POST.get('creator')
+        if Item.objects.filter(name=name, creator=creator).exists():
+            error = 'Cet item existe dejà!!!'
+            return render(request, 'item/additem.html',
+                          {'form': form, 'error': error, 'cat': cat})
+        else:
+            if form.is_valid():
+                item = Item()
+                item.name = form.cleaned_data['name']
+                item.creator = form.cleaned_data['creator']
+                item.category = Category.objects.get(name=cat)
+                item.save()
+                return redirect('itemlist', cat)
+    else:
+        form = AddItemForm()
+        return render(request, 'item/additem.html',
+                      {'form': form, 'cat': cat})
+
+
+def edititem(request, cat, id):
+    cat = Category.objects.get(name=cat)
+    item = Item.objects.get(pk=id)
+    if request.method == 'POST':
+        form = EditItemForm(request.POST)
+        name = request.POST.get('name')
+        creator = request.POST.get('creator')
+        if Item.objects.filter(name=name, creator=creator).exists():
+            error = 'Cet item existe déjà!!!'
+            return render(request, 'item/edititem.html',
+                          {'form': form, 'error': error, 'cat': cat, 'item': item})
+        else:
+            if form.is_valid():
+                item.name = form.cleaned_data['name']
+                item.creator = form.cleaned_data['creator']
+                item.category = form.cleaned_data['category']
+                item.save()
+                return redirect('itemlist', cat)
+    else:
+        form = EditItemForm()
+        return render(request, 'item/edititem.html',
+                      {'form': form, 'cat': cat, 'item': item})
+
+
+def delitem(request, cat, id):
+    cat = Category.objects.get(name=cat)
+    item = Item.objects.get(pk=id)
+    if request.method == 'POST':
+        item.delete()
+        return redirect('itemlist', cat)
+    else:
+        return render(request, 'item/delitem.html',
+                      {'cat': cat, 'item': item})

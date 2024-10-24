@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Liste de {{ cat.name }}</title>
+    </head>
+    <body>
+        <h1>Liste de {{ cat.name }}</h1>
+        <p>Intéragissez avec un {{ cat.name }} ou ajouter en un.</p>
+        <a href="{% url 'additem' cat=cat.name %}">
+            <input type="button" value="Ajouter un {{ cat.name }}"/>
+        </a>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    {% if cat.name != 'Jeu de plateau' %}
+                        <th></th>
+                        <th>Disponibilité</th>
+                        <th>Prêté le</th>
+                        <th>Emprunteur</th>
+                    {% endif %}
+                    <th>Nom</th>
+                    <th>Auteur/Créateur</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td><a href="{% url 'edititem' cat=cat.name id=item.id %}">
+                            <input type="button" value="Modifier"/>
+                        </a></td>
+                        <td><a href="{% url 'delitem' cat=cat.name id=item.id %}">
+                            <input type="button" value="Supprimer"/>
+                        </a></td>
+                        {% if cat.name != "Jeu de plateau" %}
+                            <td><a href="">
+                                <input type="button" value="Prêter"/>
+                            </a></td>
+                            {% if item.available %}
+                                <td><span style="color:green">&#x2714;</span></td>
+                            {% else %}
+                                <td><span style="color:red">&#x2718;</span></td>
+                            {% endif %}
+                            {% for loan in loans %}
+                                {% if loan.item == item.id %}
+                                    <td>{{ loan.date }}</td>
+                                    <td>{{ loan.member }}</td>
+                                {% else %}
+                                    <td></td>
+                                    <td></td>
+                                {% endif %}
+                            {% empty %}
+                                <td></td>
+                                <td></td>
+                            {% endfor %}
+                        {% endif %}
+                        <td><a href="">
+                            {{ item.name }}
+                        </a></td>
+                        <td>{{ item.creator }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
