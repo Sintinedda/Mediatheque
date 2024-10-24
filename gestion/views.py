@@ -18,9 +18,9 @@ def addcat(request):
         form = AddCatForm(request.POST)
         name = request.POST.get('name')
         if Category.objects.filter(name=name).exists():
-            error = 'Cette catégorie existe déjà!!!'
+            errmsg = 'Cette catégorie existe déjà!!!'
             return render(request, 'category/addcat.html',
-                          {'form': form, 'error': error})
+                          {'form': form, 'errmsg': errmsg})
         else:
             if form.is_valid():
                 cat = Category()
@@ -39,9 +39,9 @@ def editcat(request, cat):
         form = EditCatForm(request.POST)
         name = request.POST.get('name')
         if Category.objects.filter(name=name).exists():
-            error = 'Cette catégorie existe déjà!!!'
+            errmsg = 'Cette catégorie existe déjà!!!'
             return render(request, 'category/editcat.html',
-                          {'form': form, 'error': error, cat: cat})
+                          {'form': form, 'errmsg': errmsg, 'cat': cat})
         else:
             if form.is_valid():
                 cat.name = form.cleaned_data['name']
@@ -80,9 +80,9 @@ def additem(request, cat):
         name = request.POST.get('name')
         creator = request.POST.get('creator')
         if Item.objects.filter(name=name, creator=creator).exists():
-            error = 'Cet item existe dejà!!!'
+            errmsg = 'Cet item existe dejà!!!'
             return render(request, 'item/additem.html',
-                          {'form': form, 'error': error, 'cat': cat})
+                          {'form': form, 'errmsg': errmsg, 'cat': cat})
         else:
             if form.is_valid():
                 item = Item()
@@ -105,9 +105,9 @@ def edititem(request, cat, id):
         name = request.POST.get('name')
         creator = request.POST.get('creator')
         if Item.objects.filter(name=name, creator=creator).exists():
-            error = 'Cet item existe déjà!!!'
+            errmsg = 'Cet item existe déjà!!!'
             return render(request, 'item/edititem.html',
-                          {'form': form, 'error': error, 'cat': cat, 'item': item})
+                          {'form': form, 'errmsg': errmsg, 'cat': cat, 'item': item})
         else:
             if form.is_valid():
                 item.name = form.cleaned_data['name']
@@ -130,3 +130,90 @@ def delitem(request, cat, id):
     else:
         return render(request, 'item/delitem.html',
                       {'cat': cat, 'item': item})
+
+
+                                               # MEMBER
+
+def memblist(request):
+    members = Member.objects.all()
+    return render(request, 'member/memblist.html',
+                  {'members': members})
+
+def addmemb(request):
+    if request.method == 'POST':
+        form = AddMemberForm(request.POST)
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        if Member.objects.filter(firstname=firstname, lastname=lastname).exists():
+            errmsg = "Ce membre existe déjà!!!"
+            return render(request, 'member/addmemb.html',
+                          {'form': form, 'errmsg': errmsg})
+        else:
+            if form.is_valid():
+                memb = Member()
+                memb.firstname = form.cleaned_data['firstname']
+                memb.lastname = form.cleaned_data['lastname']
+                memb.save()
+                return redirect('memblist')
+    else:
+        form = AddMemberForm()
+        return render(request, 'member/addmemb.html',
+                      {'form': form})
+
+
+def editmemb(request, id):
+    memb = Member.objects.get(pk=id)
+    if request.method == 'POST':
+        form = EditMemberForm(request.POST)
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        if Member.objects.filter(firstname=firstname, lastname=lastname).exists():
+            name = memb.firstname + ' ' + memb.lastname
+            errmsg = "Ce membre existe déjà!!!"
+            return render(request, 'member/editmemb.html',
+                          {'form': form, 'errmsg': errmsg, 'name': name})
+        else:
+            if form.is_valid():
+                memb.firstname = form.cleaned_data['firstname']
+                memb.lastname = form.cleaned_data['lastname']
+                memb.save()
+                return redirect('memblist')
+    else:
+        form = EditMemberForm()
+        name = memb.firstname + ' ' + memb.lastname
+        return render(request, 'member/editmemb.html',
+                      {'form': form, 'name': name})
+
+
+def delmemb(request, id):
+    memb = Member.objects.get(pk=id)
+    if request.method == 'POST':
+        memb.delete()
+        return redirect('memblist')
+    else:
+        name = memb.firstname + ' ' + memb.lastname
+        return render(request, 'member/delmemb.html',
+                      {'name': name})
+
+
+def cardmemb(request, id):
+    memb = Member.objects.get(pk=id)
+    loans = Loan.objects.filter(member=memb.pk)
+    if memb.blocked:
+        if request.method == 'POST':
+            memb.blocked = False
+            memb.save()
+            return render(request, 'member/cardmemb.html',
+                          {'memb': memb, 'loans': loans})
+        else:
+            return render(request, 'member/cardmemb.html',
+                          {'memb': memb, 'loans': loans})
+    else:
+        if request.method == 'POST':
+            memb.blocked = True
+            memb.save()
+            return render(request, 'member/cardmemb.html'
+                          ,{'memb': memb, 'loans': loans})
+        else:
+            return render(request, 'member/cardmemb.html',
+                          {'memb': memb, 'loans': loans})
