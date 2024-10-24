@@ -11,7 +11,7 @@
         <form action="" method="post">
             {% csrf_token %}
             {{ form }}
-            <p>{{ error }}</p>
+            <p>{{ errmsg }}</p>
             <input type="submit" value="Ajouter"/>
             <a href="{%  url 'itemlist' cat=cat.name %}">
                 <input type="button" value="Annuler"/>

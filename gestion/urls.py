@@ -17,4 +17,12 @@ urlpatterns = [
     path('category=<cat>/add/', views.additem, name='additem' ),
     path('category=<cat>/<int:id>/edit/', views.edititem, name='edititem' ),
     path('category=<cat>/<int:id>/delete/', views.delitem, name='delitem' ),
+
+
+    # MEMBER
+    path('member/', views.memblist, name='memblist' ),
+    path('member/add/', views.addmemb, name='addmemb' ),
+    path('member/<int:id>/edit/', views.editmemb, name='editmemb' ),
+    path('member/<int:id>/delete/', views.delmemb, name='delmemb' ),
+    path('member/<int:id>/', views.cardmemb, name='cardmemb' ),
 ]

@@ -3,7 +3,7 @@ from django import forms
 from gestion.models import Category
 
 
-# CATEGORY
+                                         # CATEGORY
 
 class AddCatForm(forms.Form):
     name = forms.CharField(label='Nom', required=True)
@@ -21,7 +21,19 @@ class AddItemForm(forms.Form):
 
 
 class EditItemForm(forms.Form):
-    name = forms.CharField(label='Nom', required=False)
-    creator = forms.CharField(label='Auteur/Créateur', required = False)
+    name = forms.CharField(label='Nom', required=True)
+    creator = forms.CharField(label='Auteur/Créateur', required=True)
     category = forms.ModelChoiceField(queryset=Category.objects.all(),
                                     label='Catégorie')
+
+
+                                        # MEMBER
+
+class AddMemberForm(forms.Form):
+    firstname = forms.CharField(label='Prénom', required=True)
+    lastname = forms.CharField(label='Nom', required=True)
+
+
+class EditMemberForm(forms.Form):
+    firstname = forms.CharField(label='Prénom', required=True)
+    lastname = forms.CharField(label='Nom', required=True)
