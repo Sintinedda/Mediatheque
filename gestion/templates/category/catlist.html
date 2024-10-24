@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Liste des catégories</title>
+    </head>
+    <body>
+        <h1>Liste des catégories</h1>
+        <p>Intéragissez avec une catégorie ou ajouter en une.</p>
+        <a href="{% url 'addcat' %}"><input type="button" value="Ajouter une catégorie"/></a>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Catégorie</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                    <tr>
+                        <td><a href="{% url 'editcat' cat=category.name %}">
+                            <input type="button" value="Modifier"/>
+                        </a></td>
+                        <td><a href="{% url 'delcat' cat=category.name %}">
+                            <input type="button" value="Supprimer"/>
+                        </a></td>
+                        <td><a href="">{{ category.name }}</a></td>
+                    </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
