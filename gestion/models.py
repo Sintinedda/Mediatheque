@@ -43,10 +43,10 @@ class Item(models.Model):
 class Loan(models.Model):
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    loan_date = models.DateField()
+    date = models.DateField()
 
     def __str__(self):
-        return f'{self.member} {self.item} {self.loan_date}'
+        return f'{self.member} {self.item} {self.date}'
 
     class Meta:
-        unique_together = ('member', 'item', 'loan_date')
+        unique_together = ('member', 'item', 'date')

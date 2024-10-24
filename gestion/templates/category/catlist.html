@@ -8,7 +8,9 @@
     <body>
         <h1>Liste des catégories</h1>
         <p>Intéragissez avec une catégorie ou ajouter en une.</p>
-        <a href="{% url 'addcat' %}"><input type="button" value="Ajouter une catégorie"/></a>
+        <a href="{% url 'addcat' %}">
+            <input type="button" value="Ajouter une catégorie"/>
+        </a>
         <table>
             <thead>
                 <tr>
@@ -26,7 +28,9 @@
                         <td><a href="{% url 'delcat' cat=category.name %}">
                             <input type="button" value="Supprimer"/>
                         </a></td>
-                        <td><a href="">{{ category.name }}</a></td>
+                        <td><a href="{% url 'itemlist' cat=category.name %}">
+                            {{ category.name }}
+                        </a></td>
                     </tr>
             {% endfor %}
             </tbody>
